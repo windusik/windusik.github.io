@@ -4,7 +4,7 @@ body {
     padding: 0;
     background: url('background.jpg') no-repeat center center fixed;
     background-size: cover;
-    color: #8B0000;
+    color: #000000;
 }
 
 header {
@@ -74,7 +74,7 @@ body {
 }
 
 header {
-    background-color: #4CAF50;
+    background-color: #B00000;
     padding: 10px 0;
     text-align: center;
 }
