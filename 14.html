@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>14</title>
+<style>
+  body {
+    margin: 0;
+    background-color: #0b3d0b; /* тёмно-зелёный фон */
+    color: #00ff00; /* ярко-зелёный текст */
+    font-family: monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+
+  h1 {
+    margin-bottom: 10px;
+    color: #00ff00; /* ярко-зелёный заголовок */
+  }
+
+  label {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  textarea {
+    width: 90%;
+    max-width: 600px;
+    height: 100px;
+    margin-bottom: 10px;
+    font-family: monospace;
+    font-size: 1em;
+    padding: 10px;
+    box-sizing: border-box;
+    resize: vertical;
+
+    background-color: #1a4d1a; /* чуть светлее фон для текста */
+    border: 2px solid #00ff00; /* зелёная рамка */
+    color: #00ff00; /* зелёный текст */
+  }
+
+  button {
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+
+    background-color: #006600; /* тёмно-зелёный фон кнопки */
+    border: none;
+    color: #00ff00; /* зелёный текст */
+    font-family: monospace;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+
+  button:hover {
+    background-color: #009900; /* светлее при наведении */
+    transform: scale(1.05);
+  }
+
+  #result {
+    width: 90%;
+    max-width: 600px;
+    min-height: 50px;
+    
+    background-color: #1a4d1a; /* светлее фон для результата */
+    
+    padding: 10px;
+    box-sizing: border-box;
+    
+    white-space: pre-wrap;
+    word-wrap: break-word;
+
+    border-radius: 5px;
+
+    border: 2px solid #00ff00; /* зелёная рамка */
+    
+    color: #00ff00; /* зелёный текст */
+    
+    font-family: monospace;
+}
+</style>
+</head>
+<body>
+
+<h1>14</h1>
+
+<label for="inputText">INSERT</label>
+<textarea id="inputText" placeholder="INSERT TEXT TO THIS AREA..."></textarea>
+
+<div>
+<button id="encryptBtn">ШИФР</button>
+<button id="decryptBtn">ДЕШИФР</button>
+</div>
+
+<h2>RESULT:</h2>
+<div id="result"></div>
+
+<script>
+const inputText = document.getElementById('inputText');
+const resultDiv = document.getElementById('result');
+const encryptBtn = document.getElementById('encryptBtn');
+const decryptBtn = document.getElementById('decryptBtn');
+
+// Шифрование - для каждого символа берём его Unicode код,
+// прибавляем число 14, и соединяем через пробел
+function encrypt(text) {
+  const codes = [];
+  
+  for (let char of text) {
+    const code = char.charCodeAt(0) +14; // добавляем +14
+    codes.push(code);
+  }
+  
+  return codes.join(' ');
+}
+
+// Дешифрование - разбираем строку по пробелам,
+// для каждого числа вычитаем +14 и получаем символ
+function decrypt(text) {
+  const parts = text.trim().split(/\s+/);
+  
+  const chars = parts.map(p => {
+      const num = parseInt(p);
+      
+      if (isNaN(num)) return '?'; // если не число, ставим вопросик
+      
+      const originalCode = num -14; // вычитаем +14
+      return String.fromCharCode(originalCode);
+   });
+  
+   return chars.join('');
+}
+
+encryptBtn.onclick = () => {
+  const input = inputText.value;
+
+  const encrypted = encrypt(input);
+  
+  resultDiv.textContent = encrypted;
+};
+
+decryptBtn.onclick = () => {
+  const input = inputText.value.trim();
+
+  const decrypted = decrypt(input);
+  
+  resultDiv.textContent = decrypted;
+};
+</script>
+
+</body>
+</html>
