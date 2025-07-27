@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>14</title>
+<style>
+  body {
+    margin: 0;
+    background-color: #000;
+    font-family: monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .console {
+    width: 80%;
+    max-width: 600px;
+    height: 400px;
+    background-color: #111;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    border-radius: 8px;
+  }
+
+  #output {
+    color: #0f0;
+    white-space: pre-wrap;
+  }
+
+  #inputLine {
+    display: flex;
+  }
+
+  #prompt {
+    color: #0f0;
+  }
+
+  #input {
+    background-color: transparent;
+    border: none;
+    color: #0f0;
+    outline: none;
+    flex-grow: 1;
+    font-family: monospace;
+    font-size: 1em;
+  }
+</style>
+</head>
+<body>
+
+<div class="console" id="console">
+  <div id="output"></div>
+  <div id="inputLine">
+    <span id="prompt">></span>&nbsp;<input type="text" id="input" autofocus />
+  </div>
+</div>
+
+<script>
+const input = document.getElementById('input');
+const output = document.getElementById('output');
+
+input.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') {
+    const userText = input.value.trim();
+    
+    // Добавляем введённый текст в вывод
+    output.innerHTML += `> ${userText}\n`;
+    
+    // Выводим сообщение об ошибке
+    output.innerHTML += `INVALID SYNTAXIS\n`;
+    
+    // Очищаем поле ввода
+    input.value = '';
+    
+    // Прокручиваем вниз
+    const consoleDiv = document.getElementById('console');
+    consoleDiv.scrollTop = consoleDiv.scrollHeight;
+    
+    e.preventDefault();
+  }
+});
+</script>
+
+</body>
+</html>
